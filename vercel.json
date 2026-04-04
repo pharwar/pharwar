@@ -1,13 +1,5 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "nodeVersion": "24.x",
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "functions": {
-    "server/index.ts": {
-      "runtime": "nodejs24.x"
-    }
-  }
+  "outputDirectory": "dist/public",
+  "framework": "vite"
 }
