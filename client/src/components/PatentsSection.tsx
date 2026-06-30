@@ -26,12 +26,6 @@ const patents = [
     scope: "Novel SIAH1 inhibitors",
     icon: Globe,
   },
-  {
-    type: "PCT Application",
-    number: "CN2025/081059",
-    scope: "Anti-SIAH1 inhibitors for ALS treatment",
-    icon: Award,
-  },
 ];
 
 export default function PatentsSection() {
