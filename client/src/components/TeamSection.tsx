@@ -1,288 +1,93 @@
-/**
- * PHARWAR PHARMACEUTICALS — Team Section
- * Design: American Biotech Style - Asymmetric, Open Layout
- * Highlights: Prof. Wu (Founder), Yi Min Tseng (President), and advisory team
- */
+/** Original team biographies and photographs, presented in the partnering design system. */
+const leadership = [
+  {
+    "name": "Prof. Kou-Juey Wu",
+    "role": "Founder & Chief Scientific Officer",
+    "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/Dr.KouJueyWu_f20f239d.png",
+    "bio": "Molecular biologist and translational researcher specializing in protein degradation pathways and neurobiology. Prof. Wu's research led to the discovery of Anti-SIAH1 small-molecule inhibitors, forming the scientific foundation of Pharwar's platform."
+  },
+  {
+    "name": "Yi Min Tseng",
+    "role": "President",
+    "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/YMT2_2a60c746.jpg",
+    "bio": "Chairwoman overseeing corporate strategy and development with a focus on innovation and scientific integrity. Also leads Glyseng, specializing in Low GI and ketogenic nutrition."
+  },
+  {
+    "name": "Karl Lee",
+    "role": "Chief Executive Officer",
+    "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/KarlLee_b4729e25.jpg",
+    "bio": "Responsible for company operations with extensive biotech CEO experience and fundraising expertise. Prior role: President of HP Medical Division in Asia."
+  }
+];
 
-import { useEffect, useRef } from "react";
-import { GraduationCap, FlaskConical, Award } from "lucide-react";
+const advisors = [
+  {
+    "name": "Dr. Samuel Wang",
+    "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/Dr.SamuelWang_f7f8c3e7.jpg",
+    "bio": "Developmental & stem cell biology, 14+ years biotech experience (A*STAR, Singapore)"
+  },
+  {
+    "name": "Dr. Pei-Wen Hsieh",
+    "image": "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/SBLh2FUei3cV_e4449a8a.png",
+    "bio": "Medicinal chemist at Chang Gung University, small molecule drug development"
+  },
+  {
+    "name": "Dr. Yueh-Te Lin",
+    "image": "https://i.ibb.co/YTP9qGpj/Dr-Yueh-Te-Lin.jpg",
+    "bio": "Animal biologist, mouse addiction & behavior experiments (Chang Gung Memorial Hospital)"
+  },
+  {
+    "name": "Prof. Ann-Shyn Chiang",
+    "image": "https://i.ibb.co/bGt2KJy/Prof-Ann-Shyn-Chiang.jpg",
+    "bio": "World-renowned neuroscientist, memory formation & brain imaging expertise"
+  }
+];
 
-const PROF_WU_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/Dr.KouJueyWu_f20f239d.png";
-const YI_MIN_TSENG_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/YMT2_2a60c746.jpg";
-const DR_SAMUEL_WANG_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/Dr.SamuelWang_f7f8c3e7.jpg";
-const DR_PEI_WEN_HSIEH_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/SBLh2FUei3cV_e4449a8a.png";
-const DR_YUEH_TE_LIN_IMG = "https://i.ibb.co/YTP9qGpj/Dr-Yueh-Te-Lin.jpg";
-const PROF_ANN_SHYN_CHIANG_IMG = "https://i.ibb.co/bGt2KJy/Prof-Ann-Shyn-Chiang.jpg";
-const CEO_KARL_LEE_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663490956302/cKNv2h4wx4kzgyQRdoGY9m/KarlLee_b4729e25.jpg";
+const expertise = [
+  [
+    "Molecular Biology",
+    "Cell signaling pathway & neurobiology"
+  ],
+  [
+    "Drug Chemistry",
+    "Small molecule design & synthesis"
+  ],
+  [
+    "Translational Research",
+    "Bench-to-bedside development"
+  ],
+  [
+    "Neuroscience",
+    "Brain imaging & neural mechanisms"
+  ]
+];
 
 export default function TeamSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const reveals = entry.target.querySelectorAll(".reveal");
-            reveals.forEach((el, i) => {
-              setTimeout(() => {
-                (el as HTMLElement).style.opacity = "1";
-                (el as HTMLElement).style.transform = "translateY(0)";
-              }, i * 150);
-            });
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="team" className="py-24 lg:py-32 bg-white" ref={sectionRef}>
-      <div className="container relative z-10">
-        {/* Section Header */}
-        <div className="reveal opacity-0 translate-y-8 transition-all duration-700 mb-20">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-12 h-1 bg-[#0052cc]" />
-            <span className="text-sm tracking-[0.2em] uppercase text-[#0052cc] font-semibold">
-              Leadership
-            </span>
-          </div>
-          <h2 className="text-5xl md:text-7xl font-bold text-[#1a1a1a] leading-tight">
-            Multidisciplinary Team
-          </h2>
+    <section id="team" className="pf-team">
+      <div className="container">
+        <header className="pf-section-heading">
+          <div><p className="pf-eyebrow pf-eyebrow-dark">OUR PEOPLE</p><h2>Multidisciplinary team.</h2></div>
+          <p>Scientific discovery and development expertise, brought together.</p>
+        </header>
+        <h3 className="pf-group-label">Leadership Team</h3>
+        <div className="pf-leadership-grid">
+          {leadership.map((person, index) => (
+            <article className="pf-person" key={person.name}>
+              <div className="pf-portrait"><img src={person.image} alt={person.name} loading="lazy" /><span className="pf-person-number">0{index + 1}</span></div>
+              <div className="pf-person-content"><p className="pf-person-role">{person.role}</p><h3>{person.name}</h3>
+                {index === 0 && <p className="pf-credentials">MD, PhD</p>}
+                <p className="pf-person-bio">{person.bio}</p>
+                {index === 0 && <div className="pf-affiliation"><p>Specialization in protein degradation pathways and neurobiology</p><p>Neuroscience Research Center, Chang Gung Memorial Hospital, Taoyuan, Taiwan</p></div>}
+              </div>
+            </article>
+          ))}
         </div>
-
-        {/* Leadership Grid - Asymmetric Layout */}
-        <div className="space-y-20">
-          {/* Founder - Large Featured Card */}
-          <div className="reveal opacity-0 translate-y-8 transition-all duration-700">
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-              {/* Image - Left Side, Larger */}
-              <div className="md:col-span-1">
-                <div className="relative overflow-hidden aspect-square">
-                  <img
-                    src={PROF_WU_IMG}
-                    alt="Prof. Kou-Juey Wu"
-                    className="w-full h-full object-cover shadow-lg"
-                  />
-                </div>
-              </div>
-              
-              {/* Content - Right Side */}
-              <div className="md:col-span-4 space-y-4">
-                <span className="inline-block text-xs tracking-[0.25em] uppercase font-bold text-[#0052cc] border-b-2 border-[#0052cc] pb-2">
-                  Founder & Chief Scientific Officer
-                </span>
-                
-                <div>
-                  <h3 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] mb-2">
-                    Prof. Kou-Juey Wu
-                  </h3>
-                  <p className="text-lg text-[#0052cc] font-semibold">
-                    MD, PhD
-                  </p>
-                </div>
-
-                <p className="text-base md:text-lg text-[#333333] leading-relaxed">
-                  Molecular biologist and translational researcher specializing in protein degradation pathways and neurobiology. Prof. Wu's research led to the discovery of Anti-SIAH1 small-molecule inhibitors, forming the scientific foundation of Pharwar's platform.
-                </p>
-
-                <div className="space-y-3 pt-4">
-                  <div className="flex items-start gap-3">
-                    <GraduationCap size={18} className="text-[#0052cc] mt-1 flex-shrink-0" />
-                    <p className="text-base text-[#666666]">
-                      Specialization in protein degradation pathways and neurobiology
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <FlaskConical size={18} className="text-[#0052cc] mt-1 flex-shrink-0" />
-                    <p className="text-base text-[#666666]">
-                      Neuroscience Research Center, Chang Gung Memorial Hospital, Taoyuan, Taiwan
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* President & CEO - Stacked Layout */}
-          <div className="reveal opacity-0 translate-y-8 transition-all duration-700 space-y-12">
-              {/* President */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-                <div className="md:col-span-1">
-                  <div className="relative overflow-hidden aspect-square">
-                    <img
-                      src={YI_MIN_TSENG_IMG}
-                      alt="Yi Min Tseng"
-                      className="w-full h-full object-cover shadow-lg"
-                    />
-                  </div>
-                </div>
-                
-                <div className="md:col-span-4 space-y-4">
-                  <span className="inline-block text-xs tracking-[0.25em] uppercase font-bold text-[#0052cc] border-b-2 border-[#0052cc] pb-2">
-                    President
-                  </span>
-                  
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                    Yi Min Tseng
-                  </h3>
-                  
-                  <p className="text-base text-[#333333] leading-relaxed">
-                    Chairwoman overseeing corporate strategy and development with a focus on innovation and scientific integrity. Also leads Glyseng, specializing in Low GI and ketogenic nutrition.
-                  </p>
-                </div>
-              </div>
-
-              {/* CEO */}
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-start">
-                <div className="md:col-span-1">
-                  <div className="relative overflow-hidden aspect-square">
-                    <img
-                      src={CEO_KARL_LEE_IMG}
-                      alt="Karl Lee"
-                      className="w-full h-full object-cover shadow-lg"
-                    />
-                  </div>
-                </div>
-                
-                <div className="md:col-span-4 space-y-4">
-                  <span className="inline-block text-xs tracking-[0.25em] uppercase font-bold text-[#0052cc] border-b-2 border-[#0052cc] pb-2">
-                    Chief Executive Officer
-                  </span>
-                  
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#1a1a1a]">
-                    Karl Lee
-                  </h3>
-                  
-                  <p className="text-base text-[#333333] leading-relaxed">
-                    Responsible for company operations with extensive biotech CEO experience and fundraising expertise. Prior role: President of HP Medical Division in Asia.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-          {/* Scientific Advisory Team */}
-          <div className="reveal opacity-0 translate-y-8 transition-all duration-700">
-            <div className="mb-12">
-              <h3 className="text-3xl md:text-4xl font-bold text-[#1a1a1a] mb-2">
-                Scientific Advisory Team
-              </h3>
-              <div className="w-12 h-1 bg-[#0052cc]" />
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
-              {/* Dr. Samuel Wang */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden mb-4 aspect-square">
-                  <img
-                    src={DR_SAMUEL_WANG_IMG}
-                    alt="Dr. Samuel Wang"
-                    className="w-full h-full object-cover shadow-md"
-                  />
-                </div>
-                <h4 className="text-lg font-bold text-[#1a1a1a]">
-                  Dr. Samuel Wang
-                </h4>
-                <p className="text-sm text-[#333333] leading-relaxed">
-                  Developmental & stem cell biology, 14+ years biotech experience (A*STAR, Singapore)
-                </p>
-              </div>
-
-              {/* Dr. Pei-Wen Hsieh */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden mb-4 aspect-square">
-                  <img
-                    src={DR_PEI_WEN_HSIEH_IMG}
-                    alt="Dr. Pei-Wen Hsieh"
-                    className="w-full h-full object-cover shadow-md"
-                  />
-                </div>
-                <h4 className="text-lg font-bold text-[#1a1a1a]">
-                  Dr. Pei-Wen Hsieh
-                </h4>
-                <p className="text-sm text-[#333333] leading-relaxed">
-                  Medicinal chemist at Chang Gung University, small molecule drug development
-                </p>
-              </div>
-
-              {/* Dr. Yueh-Te Lin */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden mb-4 aspect-square">
-                  <img
-                    src={DR_YUEH_TE_LIN_IMG}
-                    alt="Dr. Yueh-Te Lin"
-                    className="w-full h-full object-cover shadow-md"
-                  />
-                </div>
-                <h4 className="text-lg font-bold text-[#1a1a1a]">
-                  Dr. Yueh-Te Lin
-                </h4>
-                <p className="text-sm text-[#333333] leading-relaxed">
-                  Animal biologist, mouse addiction & behavior experiments (Chang Gung Memorial Hospital)
-                </p>
-              </div>
-
-              {/* Prof. Ann-Shyn Chiang */}
-              <div className="space-y-4">
-                <div className="relative overflow-hidden mb-4 aspect-square">
-                  <img
-                    src={PROF_ANN_SHYN_CHIANG_IMG}
-                    alt="Prof. Ann-Shyn Chiang"
-                    className="w-full h-full object-cover shadow-md"
-                  />
-                </div>
-                <h4 className="text-lg font-bold text-[#1a1a1a]">
-                  Prof. Ann-Shyn Chiang
-                </h4>
-                <p className="text-sm text-[#333333] leading-relaxed">
-                  World-renowned neuroscientist, memory formation & brain imaging expertise
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Core Expertise Grid */}
-          <div className="reveal opacity-0 translate-y-8 transition-all duration-700 grid grid-cols-2 md:grid-cols-4 gap-6 pt-12 border-t border-[#e0e0e0]">
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-[#0052cc] uppercase tracking-wide">
-                Molecular Biology
-              </h4>
-              <p className="text-sm text-[#333333]">
-                Cell signaling pathway & neurobiology
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-[#0052cc] uppercase tracking-wide">
-                Drug Chemistry
-              </h4>
-              <p className="text-sm text-[#333333]">
-                Small molecule design & synthesis
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-[#0052cc] uppercase tracking-wide">
-                Translational Research
-              </h4>
-              <p className="text-sm text-[#333333]">
-                Bench-to-bedside development
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-sm font-bold text-[#0052cc] uppercase tracking-wide">
-                Neuroscience
-              </h4>
-              <p className="text-sm text-[#333333]">
-                Brain imaging & neural mechanisms
-              </p>
-            </div>
-          </div>
+        <div className="pf-advisory-heading"><h3>Scientific Advisory Team</h3><span>Complementary perspectives. Shared purpose.</span></div>
+        <div className="pf-advisor-grid">
+          {advisors.map((person) => <article className="pf-advisor" key={person.name}><div className="pf-advisor-portrait"><img src={person.image} alt={person.name} loading="lazy" /></div><h4>{person.name}</h4><p>{person.bio}</p></article>)}
         </div>
+        <div className="pf-expertise-grid">{expertise.map(([title, description]) => <div key={title}><h4>{title}</h4><p>{description}</p></div>)}</div>
       </div>
     </section>
   );
